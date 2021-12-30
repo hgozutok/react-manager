@@ -17,15 +17,12 @@ function Dashboard() {
       Dashboard
       <Grid
         container
-        margin={25}
         spacing={3}
         sx={{
           margin: "15px",
           padding: "15px",
 
           borderRadius: "1px",
-
-          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
 
           display: "flex",
           flexDirection: "row",
@@ -39,14 +36,25 @@ function Dashboard() {
         }}
       >
         <Card>
-          <CardContent boxShadow={2}>
-            <Typography variant="h5">Companies</Typography>
+          <CardContent>
+            <Typography variant="h5">Categories</Typography>
           </CardContent>
-          <CardActions>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <Button variant="contained" size="small">
               Add
             </Button>
-            <Button variant="contained" size="small">
+            <Button
+              href="/dashboard/categories"
+              variant="contained"
+              size="small"
+            >
               List
             </Button>
           </CardActions>
@@ -54,12 +62,47 @@ function Dashboard() {
 
         <Card>
           <CardContent>
+            <Typography variant="h5">Companies</Typography>
+          </CardContent>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
+            <Button variant="contained" size="small">
+              Add
+            </Button>
+            <Button href="#" variant="contained" size="small">
+              List
+            </Button>
+          </CardActions>
+        </Card>
+
+        <Card>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <Typography variant="h5" gutterBottom>
               Employees
             </Typography>
           </CardContent>
 
-          <CardActions>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <Button variant="contained" size="small">
               Add
             </Button>
@@ -70,13 +113,27 @@ function Dashboard() {
         </Card>
 
         <Card>
-          <CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <Typography variant="h5" gutterBottom>
               Products
             </Typography>
           </CardContent>
 
-          <CardActions>
+          <CardActions
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <Button variant="contained" size="small">
               Add
             </Button>

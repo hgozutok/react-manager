@@ -11,6 +11,7 @@ import Contact from "pages/Contact";
 import { Home } from "pages/Home";
 import Dashboard from "pages/dashboard";
 import Register from "login/Register";
+import { ListCategories } from "pages/dashboard/Category/ListCategories";
 
 function RouteTables() {
   return (
@@ -58,6 +59,14 @@ function RouteTables() {
         element={
           <Layout>
             <Contact />
+          </Layout>
+        }
+      />
+      <Route
+        path="/dashboard/categories"
+        element={
+          <Layout>
+            <ListCategories />
           </Layout>
         }
       />
