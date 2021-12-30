@@ -10,6 +10,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import Contact from "pages/Contact";
 import { Home } from "pages/Home";
 import Dashboard from "pages/dashboard";
+import Register from "login/Register";
 
 function RouteTables() {
   return (
@@ -36,6 +37,14 @@ function RouteTables() {
         }
       />
       <Route path="/login" element={<Login />} />
+      <Route
+        path="/register"
+        element={
+          <Layout>
+            <Register />
+          </Layout>
+        }
+      />
       <Route
         path="/about"
         element={

@@ -39,8 +39,10 @@ function useUserActions() {
   }
 
   function logout() {
-    // axios.defaults.headers.common["Authorization"] = "Bearer " + auth.token;
-    // axios.post(`${baseUrl}/user/revoke-token/`, { token: auth.token });
+    axios.defaults.headers.common["Authorization"] = "Bearer " + auth.token;
+    axios.get(`${baseUrl}/categories/`).then((res) => {
+       console.log(res.data);});
+
     // setAuth(null);
     // navigate("/");
     let token = auth.token;
