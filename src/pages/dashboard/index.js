@@ -39,10 +39,8 @@ function Dashboard() {
         }}
       >
         <Card>
-          <CardContent>
-            <Typography variant="h5" gutterBottom>
-              Companies
-            </Typography>
+          <CardContent boxShadow={2}>
+            <Typography variant="h5">Companies</Typography>
           </CardContent>
           <CardActions>
             <Button variant="contained" size="small">
