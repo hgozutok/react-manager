@@ -47,7 +47,11 @@ function Dashboard() {
               gap: "20px",
             }}
           >
-            <Button variant="contained" size="small">
+            <Button
+              href="/dashboard/category/new"
+              variant="contained"
+              size="small"
+            >
               Add
             </Button>
             <Button
