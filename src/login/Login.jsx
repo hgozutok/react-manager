@@ -21,6 +21,7 @@ import Alert from "@mui/material/Alert";
 import { FormControl } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
+import Register from "./Register";
 
 export { Login };
 
@@ -113,6 +114,9 @@ function Login({ history }) {
         <CardActions>
           <Button size="small">Forgot Password?</Button>
         </CardActions>
+      </Card>{" "}
+      <Card sx={{ maxWidth: 475, minWidth: 375 }}>
+        <Register />
       </Card>
     </Box>
   );

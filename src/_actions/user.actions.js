@@ -3,7 +3,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { history, useFetchWrapper } from "_helpers";
 import { authAtom, usersAtom } from "_state";
 import { useNavigate } from "react-router-dom";
-import { LineAxis } from "@mui/icons-material";
 import axios from "axios";
 
 export { useUserActions };
@@ -21,16 +20,18 @@ function useUserActions() {
     login,
     logout,
     getAll,
+    register,
   };
 
   function login(email, password) {
-    return fetchWrapper
-      .post(`${baseUrl}/user/token`, { email, password })
-      .then((user) => {
+    console.log(baseUrl);
+    return axios
+      .post(baseUrl + "/user/token", { email, password })
+      .then((usr) => {
         // console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem("user", JSON.stringify(user));
-        setAuth(user);
+        localStorage.setItem("user", JSON.stringify(usr));
+        setAuth(usr);
 
         // get return url from location state or default to home page
         const { from } = history.location.state || { from: { pathname: "/" } };
@@ -39,12 +40,13 @@ function useUserActions() {
   }
 
   function logout() {
-    axios.defaults.headers.common["Authorization"] = "Bearer " + auth.token;
-    axios.get(`${baseUrl}/categories/`).then((res) => {
-       console.log(res.data);});
+    // axios.defaults.headers.common["Authorization"] = "Bearer " + auth.token;
+    // axios.get(`${baseUrl}/categories/`).then((res) => {
+    //   console.log(res.data);
+    // });
 
-    // setAuth(null);
-    // navigate("/");
+    setAuth(null);
+    navigate("/");
     let token = auth.token;
     fetchWrapper.post(`${baseUrl}/user/revoke-token/`, { token });
 
@@ -56,5 +58,38 @@ function useUserActions() {
 
   function getAll() {
     return fetchWrapper.get(baseUrl).then(setUsers);
+  }
+  async function register(user) {
+    console.log(JSON.stringify(user));
+    delete user.passwordvalidate;
+    return await axios
+      .post(`${baseUrl}/user/register`, JSON.stringify(user), {
+        headers: {
+          accept: "*/*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((usr) => {
+        if (usr.status === 200) {
+          var userRes = JSON.stringify(usr);
+          if (
+            userRes.includes(" already registered") ||
+            userRes.includes("Registered with username")
+          ) {
+            alert("User already registered with this email or username");
+          } else {
+            console.log(user, "created");
+            localStorage.setItem("user", userRes);
+            setAuth(usr);
+
+            const { from } = history.location.state || {
+              from: { pathname: "/" },
+            };
+            navigate(from);
+          }
+        }
+
+        // login(usr.email, usr.password);
+      });
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +15,12 @@ import Button from "@mui/material/Button";
 import { visuallyHidden } from "@mui/utils";
 import { useCategories } from "_components/services/useCategories";
 import { Typography } from "@mui/material";
+
+import { forwardRef, useRef, useImperativeHandle } from "react";
+import SnackBarMenu from "../../../_components/layout/SnackBarMenu";
+import BasicModal from "_components/layout/basicModal";
+
+import { v4 as uuidv4 } from "uuid";
 
 //  "categoryID": 0,
 //     "parentID": 0,
@@ -47,6 +53,32 @@ export const ListCategories = () => {
   const [categories, setCategories] = React.useState([]);
 
   const [isLoading, setIsloding] = React.useState(false);
+
+  const modalRef = useRef();
+  const snackBarRef = useRef();
+
+  //const [showModal, setShowModal] = useState(false); //modal show
+  //const navigate = useNavigate();
+
+  const [snackbar, setSnackbar] = useState({
+    //snackbar state
+    vertical: "top",
+    horizontal: "right",
+    message: "Category edited",
+    actionTitle: "View ",
+    pageUrl: "/dashboard/categories",
+  }); //snackbar message
+
+  const openSnack = () => {
+    snackBarRef.current.handleClick(snackbar);
+  };
+
+  const openPopup = () => {
+    modalRef.current.handleOpen(
+      "Delete",
+      "Are you sure you want to delete this category?"
+    );
+  };
 
   React.useEffect(() => {
     async function fetchData() {
@@ -107,14 +139,16 @@ export const ListCategories = () => {
                   {row.description}
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  <DeleteIcon />
-                  <EditIcon />
+                  <DeleteIcon onClick={openPopup} />
+                  <EditIcon onClick={openSnack} />
                 </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <SnackBarMenu ref={snackBarRef} />
+      <BasicModal ref={modalRef} />
     </div>
   );
 };

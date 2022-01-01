@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useUserActions } from "_actions";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is required"),
@@ -23,9 +24,10 @@ const validationSchema = Yup.object().shape({
       "Password must contain at least one lowercase letter, one uppercase letter, one number and one special character"
     ),
 
-  passwordvalidate: Yup.string()
-    .required("Password is required")
-    .oneOf([Yup.ref("password"), null], "Passwords must match"),
+  passwordvalidate: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
   image: Yup.string().url("Invalid URL"),
 });
 
@@ -35,11 +37,13 @@ const initValues = {
   username: "",
   email: "",
   password: "",
+  passwordvalidate: "",
   image: "",
 };
 
 function Register(props) {
   const { validate } = props;
+  const userActions = useUserActions();
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -50,9 +54,14 @@ function Register(props) {
         initialValues={initValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          if (validate(values)) {
-            console.log(values);
-          }
+          // console.log("object");
+          //  if (validate(values)) {
+          // console.log(values);
+          userActions.register(values).catch((error) => {
+            console.log("apiError", { message: error });
+          });
+          //console.log("usr");
+          // }
         }}
       >
         {({ errors, touched, validateField, validateForm }) => (

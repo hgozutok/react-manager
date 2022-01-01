@@ -10,12 +10,6 @@ const useCategories = () => {
 
   const baseUrl = `${process.env.REACT_APP_API_URL}/api`;
 
-  //   React.useEffect(() => {
-  //     getCategories().then((res) => {
-  //       setCategories(res);
-  //     });
-  //   }, []);
-
   return {
     getCategories,
     getCategory,
@@ -32,9 +26,6 @@ const useCategories = () => {
         Authorization: `Bearer ${auth.token}`,
       },
     });
-    //   .then((res) => {
-    //     return res;
-    //   });
     return response.data;
   }
 
