@@ -11,7 +11,7 @@ function useUserActions() {
   let navigate = useNavigate();
   const baseUrl = `${process.env.REACT_APP_API_URL}/api`;
   // const baseUrl = `http://localhost:4000/users`;
-  const fetchWrapper = useFetchWrapper();
+  //const fetchWrapper = useFetchWrapper();
   const setAuth = useSetRecoilState(authAtom);
   const auth = useRecoilValue(authAtom);
   const setUsers = useSetRecoilState(usersAtom);
@@ -48,7 +48,7 @@ function useUserActions() {
     setAuth(null);
     navigate("/");
     let token = auth.token;
-    fetchWrapper.post(`${baseUrl}/user/revoke-token/`, { token });
+    axios.post(`${baseUrl}/user/revoke-token/`, { token });
 
     // remove user from local storage, set auth state to null and redirect to login page
     localStorage.removeItem("user");
@@ -57,7 +57,7 @@ function useUserActions() {
   }
 
   function getAll() {
-    return fetchWrapper.get(baseUrl).then(setUsers);
+    return axios.get(baseUrl).then(setUsers);
   }
   async function register(user) {
     console.log(JSON.stringify(user));

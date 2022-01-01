@@ -18,10 +18,11 @@ import Typography from "@mui/material/Typography";
 
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
-import { FormControl } from "@mui/material";
+import { FormControl, Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Register from "./Register";
+import { typography } from "@mui/system";
 
 export { Login };
 
@@ -59,13 +60,57 @@ function Login({ history }) {
   }
 
   return (
-    <Box
+    // <Box
+    //   display="flex"
+    //   flexDirection="row"
+    //   justifyContent="center"
+    //   spacing={2}
+    //   margin={2}
+    //   padding={2}
+    //   gap={5}
+    //   minHeight="100vh"
+    //   sx={{
+    //     alignContent: "space-around",
+    //     alignItems: "center",
+    //   }}
+    // > </Box>
+
+    <Grid
+      container
+      spacing={2}
       display="flex"
+      flexDirection="row"
       justifyContent="center"
-      alignItems="center"
+      gap={5}
       minHeight="100vh"
+      sx={{
+        padding: "15px",
+        margin: "15px",
+
+        borderRadius: "1px",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: "20px",
+        alignItems: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        justifyItems: "center",
+        textAlign: "center",
+      }}
     >
-      <Card sx={{ maxWidth: 475, minWidth: 375 }}>
+      <Card
+        sx={{
+          padding: "50px",
+          margin: "50px",
+          maxWidth: 475,
+          minWidth: 375,
+          alignContent: "space-around",
+          borderRadius: "5%",
+          webkitBoxShadow: "5px 5px 18px 5px #000000",
+          boxShadow: "5px 5px 18px 5px #000000",
+        }}
+      >
         <CardContent>
           <Typography variant="h5" color="text.secondary" gutterBottom>
             Please Login
@@ -114,10 +159,42 @@ function Login({ history }) {
         <CardActions>
           <Button size="small">Forgot Password?</Button>
         </CardActions>
-      </Card>{" "}
-      <Card sx={{ maxWidth: 475, minWidth: 375 }}>
+      </Card>
+      <Card
+        sx={{
+          padding: 2,
+          minWidth: "100px",
+          minHeight: "100px",
+          maxWidth: "100px",
+          maxHeight: "100px",
+          borderRadius: "50%",
+          alignContent: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          justifyItems: "center",
+          backgroundColor: "background.paper",
+          webkitBoxShadow: "5px 5px 18px 5px #000000",
+          boxShadow: "5px 5px 18px 5px #000000",
+        }}
+      >
+        <Typography variant="h3">OR</Typography>
+      </Card>
+      <Card
+        sx={{
+          maxWidth: 675,
+          minWidth: 475,
+          borderRadius: "5%",
+          padding: "50px",
+          margin: "50px",
+          justifyContent: "center",
+          alignContent: "center",
+          gap: "5",
+          webkitBoxShadow: "5px 5px 18px 5px #000000",
+          boxShadow: "5px 5px 18px 5px #000000",
+        }}
+      >
         <Register />
       </Card>
-    </Box>
+    </Grid>
   );
 }

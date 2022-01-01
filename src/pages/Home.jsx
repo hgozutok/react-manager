@@ -10,11 +10,10 @@ export { Home };
 function Home() {
   const auth = useRecoilValue(authAtom);
   const users = useRecoilValue(usersAtom);
-  const userActions = useUserActions();
+  //  const userActions = useUserActions();
 
   useEffect(() => {
-    userActions.getAll();
-
+    // userActions.getAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -24,18 +23,19 @@ function Home() {
         Home
       </Typography>
       {auth ? (
-        <Typography variant="h3" gutterBottom>
-          Hi {auth?.userName}!
-        </Typography>
+        <div>
+          <Typography variant="h3" gutterBottom>
+            Hi {auth?.userName}!
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {JSON.stringify(auth)}
+          </Typography>
+        </div>
       ) : (
         <Typography variant="h3" gutterBottom>
           Hi, Guest! You are not logged in
         </Typography>
       )}
-
-      <Typography variant="body1" gutterBottom>
-        {JSON.stringify(auth)}
-      </Typography>
     </>
   );
 }

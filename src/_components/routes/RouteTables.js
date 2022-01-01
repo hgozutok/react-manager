@@ -13,6 +13,7 @@ import Dashboard from "pages/dashboard";
 import Register from "login/Register";
 import { ListCategories } from "pages/dashboard/Category/ListCategories";
 import { NewCategory } from "pages/dashboard/Category/NewCategory";
+import { LeftMenu } from "_components/layout/LeftMenu";
 
 function RouteTables() {
   return (
@@ -33,6 +34,7 @@ function RouteTables() {
         element={
           <PrivateRoute>
             <Layout>
+              <LeftMenu />
               <Dashboard />
             </Layout>
           </PrivateRoute>
