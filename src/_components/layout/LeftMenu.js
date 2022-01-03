@@ -17,15 +17,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Navbar } from "react-bootstrap";
 
-const drawerWidth = 240;
-
 export const LeftMenu = (props) => {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(true);
 
+  const drawerWidth = mobileOpen ? 240 : 240;
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
   const drawer = (
     <div>
       <Toolbar />
@@ -57,10 +57,12 @@ export const LeftMenu = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <Box
+        onMouseEnter={handleDrawerToggle}
+        onMouseLeave={handleDrawerToggle}
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: { drawerWidth } }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}

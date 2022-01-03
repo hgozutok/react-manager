@@ -30,8 +30,8 @@ function useUserActions() {
       .then((usr) => {
         // console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem("user", JSON.stringify(usr));
-        setAuth(usr);
+        localStorage.setItem("user", JSON.stringify(usr.data));
+        setAuth(usr.data);
 
         // get return url from location state or default to home page
         const { from } = history.location.state || { from: { pathname: "/" } };
@@ -71,7 +71,7 @@ function useUserActions() {
       })
       .then((usr) => {
         if (usr.status === 200) {
-          var userRes = JSON.stringify(usr);
+          var userRes = JSON.stringify(usr.data);
           if (
             userRes.includes(" already registered") ||
             userRes.includes("Registered with username")

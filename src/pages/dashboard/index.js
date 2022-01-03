@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { LeftMenu } from "_components/layout/LeftMenu";
 
 function Dashboard() {
   return (
@@ -63,7 +64,6 @@ function Dashboard() {
             </Button>
           </CardActions>
         </Card>
-
         <Card>
           <CardContent>
             <Typography variant="h5">Companies</Typography>
@@ -84,7 +84,6 @@ function Dashboard() {
             </Button>
           </CardActions>
         </Card>
-
         <Card>
           <CardContent
             sx={{
@@ -115,7 +114,6 @@ function Dashboard() {
             </Button>
           </CardActions>
         </Card>
-
         <Card>
           <CardContent
             sx={{

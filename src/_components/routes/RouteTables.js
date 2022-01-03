@@ -12,7 +12,7 @@ import { Home } from "pages/Home";
 import Dashboard from "pages/dashboard";
 import Register from "login/Register";
 import { ListCategories } from "pages/dashboard/Category/ListCategories";
-import { NewCategory } from "pages/dashboard/Category/NewCategory";
+import { NeworEditCategory } from "pages/dashboard/Category/NewCategory";
 import { LeftMenu } from "_components/layout/LeftMenu";
 
 function RouteTables() {
@@ -34,7 +34,7 @@ function RouteTables() {
         element={
           <PrivateRoute>
             <Layout>
-              <LeftMenu />
+              {/* <LeftMenu /> */}
               <Dashboard />
             </Layout>
           </PrivateRoute>
@@ -77,7 +77,15 @@ function RouteTables() {
         path="/dashboard/category/new"
         element={
           <Layout>
-            <NewCategory />
+            <NeworEditCategory />
+          </Layout>
+        }
+      />
+      <Route
+        path="/dashboard/category/edit/:id"
+        element={
+          <Layout>
+            <NeworEditCategory />
           </Layout>
         }
       />

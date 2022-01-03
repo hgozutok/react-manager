@@ -5,7 +5,7 @@ import { authAtom } from "_state";
 
 const useCategories = () => {
   const [categories, setCategories] = React.useState([]);
-  const [category, setCategory] = React.useState([]);
+  const [category, setCategory] = React.useState(null);
   const auth = useRecoilValue(authAtom);
 
   const baseUrl = `${process.env.REACT_APP_API_URL}/api`;
@@ -18,24 +18,39 @@ const useCategories = () => {
     deleteCategory,
     categories,
     setCategories,
+    category,
   };
 
   async function getCategories() {
-    const response = await axios.get(`${baseUrl}/categories/`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
-    return response.data;
+    const response = await axios
+      .get(`${baseUrl}/categories/`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
+      .then((res) => {
+        setCategories(res.data);
+        return res.data;
+      });
   }
 
   async function getCategory(id) {
-    const response = await axios
-      .get(`${baseUrl}/categories/${id}`)
+    var data = null;
+    await axios
+      .get(`${baseUrl}/categories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
       .then((res) => {
+        // console.log(res.data);
         setCategory(res.data);
+        // console.log(category);
+        data = res.data;
+        return res.data;
       });
-    return response.data;
+
+    return data;
   }
 
   async function createCategory(category) {
