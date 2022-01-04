@@ -19,8 +19,10 @@ import { Typography } from "@mui/material";
 import { forwardRef, useRef, useImperativeHandle } from "react";
 import SnackBarMenu from "../../../_components/layout/SnackBarMenu";
 import BasicModal from "_components/layout/basicModal";
+import Skeleton from "@mui/material/Skeleton";
 
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 //  "categoryID": 0,
 //     "parentID": 0,
@@ -49,6 +51,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const ListCategories = () => {
+  const navigation = useNavigate();
   const { getCategories } = useCategories();
   const [categories, setCategories] = React.useState([]);
 
@@ -79,21 +82,23 @@ export const ListCategories = () => {
       "Are you sure you want to delete this category?"
     );
   };
-
+  const fetchData = async () => {
+    // setIsloding(true);
+    return await getCategories();
+  };
   React.useEffect(() => {
-    async function fetchData() {
-      setIsloding(true);
-      setCategories(await getCategories());
-
-      console.log("categories", categories);
+    setIsloding(true);
+    fetchData().then((res) => {
+      setCategories(res);
+      // console.log("categories", res);
       setIsloding(false);
-    }
-
-    fetchData();
+    });
   }, []);
 
   return isLoading ? (
-    <div>Loading...</div>
+    <div>
+      <Skeleton animation="wave" variant="rect" height={40} />
+    </div>
   ) : (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -114,13 +119,16 @@ export const ListCategories = () => {
         </Button>
       </div>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="customized table">
+      <TableContainer
+        sx={{ margin: "5rem,5rem,5rem,5rem", padding: "5rem" }}
+        component={Paper}
+      >
+        <Table sx={{}} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>categoryID</StyledTableCell>
-              <StyledTableCell align="right">parentID</StyledTableCell>
-              <StyledTableCell align="right">categoryName</StyledTableCell>
+              <StyledTableCell align="left">PID</StyledTableCell>
+              <StyledTableCell align="left">categoryName</StyledTableCell>
               <StyledTableCell align="left">description</StyledTableCell>
               <StyledTableCell align="left">Command</StyledTableCell>
             </TableRow>
@@ -128,10 +136,8 @@ export const ListCategories = () => {
           <TableBody>
             {categories.map((row) => (
               <StyledTableRow key={row.categoryID}>
-                <StyledTableCell align="right">
-                  {row.categoryID}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.parentID}</StyledTableCell>
+                <StyledTableCell align="left">{row.categoryID}</StyledTableCell>
+                <StyledTableCell align="left">{row.parentID}</StyledTableCell>
                 <StyledTableCell align="left">
                   {row.categoryName}
                 </StyledTableCell>
@@ -140,7 +146,11 @@ export const ListCategories = () => {
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   <DeleteIcon onClick={openPopup} />
-                  <EditIcon onClick={openSnack} />
+                  <EditIcon
+                    onClick={() =>
+                      navigation(`/dashboard/category/edit/${row.categoryID}`)
+                    }
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

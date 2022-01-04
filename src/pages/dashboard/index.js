@@ -76,10 +76,18 @@ function Dashboard() {
               gap: "20px",
             }}
           >
-            <Button variant="contained" size="small">
+            <Button
+              href="/dashboard/company/new"
+              variant="contained"
+              size="small"
+            >
               Add
             </Button>
-            <Button href="#" variant="contained" size="small">
+            <Button
+              href="/dashboard/companies"
+              variant="contained"
+              size="small"
+            >
               List
             </Button>
           </CardActions>

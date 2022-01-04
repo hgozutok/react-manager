@@ -22,6 +22,7 @@ const useCategories = () => {
   };
 
   async function getCategories() {
+    var data = null;
     const response = await axios
       .get(`${baseUrl}/categories/`, {
         headers: {
@@ -30,8 +31,11 @@ const useCategories = () => {
       })
       .then((res) => {
         setCategories(res.data);
+        console.log(res.data);
+        data = res.data;
         return res.data;
       });
+    return data;
   }
 
   async function getCategory(id) {
@@ -54,30 +58,41 @@ const useCategories = () => {
   }
 
   async function createCategory(category) {
+    delete category.categoryID;
+    delete category.picture;
     const response = await axios
-      .post(`${baseUrl}/categories/`, category)
+      .post(`${baseUrl}/categories/`, category, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
       .then((res) => {
-        setCategory(res.data);
+        setCategory(res);
       });
-    return response.data;
+    return response;
   }
 
   async function updateCategory(id, category) {
     const response = await axios
-      .put(`${baseUrl}/categories/${id}`, category)
+      .put(`${baseUrl}/categories/${id}`, category, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
       .then((res) => {
-        setCategory(res.data);
+        setCategory(res);
+        console.log(res);
       });
-    return response.data;
+    return response;
   }
 
   async function deleteCategory(id) {
     const response = await axios
       .delete(`${baseUrl}/categories/${id}`)
       .then((res) => {
-        setCategory(res.data);
+        setCategory(res);
       });
-    return response.data;
+    return response;
   }
 };
 

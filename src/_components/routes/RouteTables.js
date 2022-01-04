@@ -14,6 +14,8 @@ import Register from "login/Register";
 import { ListCategories } from "pages/dashboard/Category/ListCategories";
 import { NeworEditCategory } from "pages/dashboard/Category/NewCategory";
 import { LeftMenu } from "_components/layout/LeftMenu";
+import ListCompanies from "pages/dashboard/Company/ListCompanies";
+import { UpsertCompany } from "pages/dashboard/Company/UpsertCompany";
 
 function RouteTables() {
   return (
@@ -86,6 +88,30 @@ function RouteTables() {
         element={
           <Layout>
             <NeworEditCategory />
+          </Layout>
+        }
+      />
+      <Route
+        path="/dashboard/companies"
+        element={
+          <Layout>
+            <ListCompanies />
+          </Layout>
+        }
+      />
+      <Route
+        path="/dashboard/company/new"
+        element={
+          <Layout>
+            <UpsertCompany />
+          </Layout>
+        }
+      />
+      <Route
+        path="/dashboard/company/edit/:id"
+        element={
+          <Layout>
+            <UpsertCompany />
           </Layout>
         }
       />
